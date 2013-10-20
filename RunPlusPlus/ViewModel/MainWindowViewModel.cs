@@ -27,12 +27,16 @@ namespace RunPlusPlus.ViewModel
                     return this.SelectedItem != null;
                 });
 
-            this.SaveCommand = new RelayCommand(this.SaveItem,
-                () =>
+            this.SaveCommand = new RelayCommand<ShortcutViewModel>(this.SaveItem,
+                p =>
                 {
-                    return this.SelectedItem == null ? 
-                        false : 
-                        !string.IsNullOrEmpty(this.SelectedItem.Shortcut);
+                    if (p != null &&
+                        !string.IsNullOrEmpty(p.Shortcut) &&
+                        !string.IsNullOrEmpty(p.Command))
+                    {
+                        return true;
+                    }
+                    return false;
                 });
         }
 
@@ -67,13 +71,14 @@ namespace RunPlusPlus.ViewModel
 
         public RelayCommand ShowAboutCommand { get; set; }
 
-        public RelayCommand SaveCommand { get; set; }
+        public RelayCommand<ShortcutViewModel> SaveCommand { get; set; }
 
         private void AddItem()
         {
             var item = new ShortcutViewModel();
             this.Shortcuts.Add(item);
             this.SelectedItem = item;
+            item.PropertyChanged += (o, e) => this.SaveCommand.RaiseCanExecuteChanged();
         }
 
         private void RemoveItem()
@@ -91,9 +96,9 @@ namespace RunPlusPlus.ViewModel
             }
         }
 
-        private void SaveItem()
+        private void SaveItem(ShortcutViewModel item)
         {
-            this.SelectedItem.Save();
+            item.Save();
         }
     }
 }

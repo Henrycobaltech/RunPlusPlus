@@ -1,4 +1,5 @@
-﻿using RunPlusPlus.ViewModel;
+﻿using Microsoft.Win32;
+using RunPlusPlus.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,16 @@ namespace RunPlusPlus
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
+        }
+
+        private void OnBrowseButtonClick(object sender, RoutedEventArgs e)
+        {
+            var dlg = new OpenFileDialog();
+            var isOk = dlg.ShowDialog();
+            if (isOk != null && isOk.Value)
+            {
+                this.commandTextBox.Text = dlg.FileName;
+            }
         }
     }
 }
