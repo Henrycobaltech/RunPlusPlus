@@ -26,18 +26,6 @@ namespace RunPlusPlus.ViewModel
                 {
                     return this.SelectedItem != null;
                 });
-
-            this.SaveCommand = new RelayCommand<ShortcutViewModel>(this.SaveItem,
-                p =>
-                {
-                    if (p != null &&
-                        !string.IsNullOrEmpty(p.Shortcut) &&
-                        !string.IsNullOrEmpty(p.Command))
-                    {
-                        return true;
-                    }
-                    return false;
-                });
         }
 
         private ObservableCollection<ShortcutViewModel> _shorts = new ObservableCollection<ShortcutViewModel>();
@@ -48,7 +36,7 @@ namespace RunPlusPlus.ViewModel
             set
             {
                 _shorts = value;
-                this.RaisePropertyChanged("Shortcuts");
+                this.RaisePropertyChanged();
             }
         }
 
@@ -60,7 +48,7 @@ namespace RunPlusPlus.ViewModel
             set
             {
                 _selectedItem = value;
-                this.RaisePropertyChanged("SelectedItem");
+                this.RaisePropertyChanged();
             }
         }
 
@@ -71,14 +59,12 @@ namespace RunPlusPlus.ViewModel
 
         public RelayCommand ShowAboutCommand { get; set; }
 
-        public RelayCommand<ShortcutViewModel> SaveCommand { get; set; }
 
         private void AddItem()
         {
             var item = new ShortcutViewModel();
             this.Shortcuts.Add(item);
             this.SelectedItem = item;
-            item.PropertyChanged += (o, e) => this.SaveCommand.RaiseCanExecuteChanged();
         }
 
         private void RemoveItem()
@@ -94,11 +80,6 @@ namespace RunPlusPlus.ViewModel
             {
                 this.SelectedItem = this.Shortcuts[index];
             }
-        }
-
-        private void SaveItem(ShortcutViewModel item)
-        {
-            item.Save();
         }
     }
 }

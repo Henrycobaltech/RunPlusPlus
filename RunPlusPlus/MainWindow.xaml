@@ -8,7 +8,7 @@
     <Window.Resources>
         <ObjectDataProvider x:Key="windowTypeEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>
-                <x:TypeExtension Type="{x:Type model:WindowType}"/>
+                <x:TypeExtension Type="{x:Type model:WindowTypes}"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
         <local:IsNullBoolConverter x:Key="editPanelConverter"/>
@@ -34,8 +34,9 @@
                         <GridView.Columns>
                             <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}"/>
                             <GridViewColumn Header="Shortcut" Width="70" DisplayMemberBinding="{Binding Shortcut}"/>
-                            <GridViewColumn Header="Command" Width="250" DisplayMemberBinding="{Binding Command}"/>
-                            <GridViewColumn Header="Admin" DisplayMemberBinding="{Binding IsRunAsAdministrator}"/>
+                            <GridViewColumn Header="Target" Width="250" DisplayMemberBinding="{Binding Target}"/>
+                            <GridViewColumn Header="Startup Path" Width="250" DisplayMemberBinding="{Binding StartupPath}"/>
+                            <!--<GridViewColumn Header="Admin" DisplayMemberBinding="{Binding IsRunAsAdministrator}"/>-->
                             <GridViewColumn Header="Window Type" DisplayMemberBinding="{Binding WindowType}"/>
                         </GridView.Columns>
                     </GridView>
@@ -71,6 +72,8 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -82,7 +85,7 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Name"/>
-                        <TextBox Grid.Column="1" Text="{Binding SelectedItem.Name, UpdateSourceTrigger=PropertyChanged, Delay=300}"/>
+                        <TextBox Grid.Column="1" Text="{Binding SelectedItem.Name, UpdateSourceTrigger=PropertyChanged, Delay=250}"/>
                     </Grid>
 
                     <Grid Grid.Column="1">
@@ -91,36 +94,50 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Shortcut"/>
-                        <TextBox Grid.Column="1" Text="{Binding SelectedItem.Shortcut, UpdateSourceTrigger=PropertyChanged, Delay=300}"/>
+                        <TextBox Grid.Column="1" Text="{Binding SelectedItem.Shortcut, UpdateSourceTrigger=PropertyChanged, Delay=250}"/>
                     </Grid>
                     <Grid Grid.Row="1" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Command" />
+                        <TextBlock Text="Target" />
                         <Grid Grid.Column="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox x:Name="commandTextBox" Text="{Binding SelectedItem.Command, UpdateSourceTrigger=PropertyChanged, Delay=300}"/>
-                            <Button Content="..." Grid.Column="1" Padding="5,0" Margin="0,4,3,4" Click="OnBrowseButtonClick"/>
+                            <TextBox x:Name="targetTextBox" Text="{Binding SelectedItem.Target, UpdateSourceTrigger=PropertyChanged, Delay=250}"/>
+                            <Button Content="..." Grid.Column="1" Padding="5,0" Margin="0,4,3,4" Click="OnBrowseTargetButtonClick"/>
                         </Grid>
                     </Grid>
-                    <CheckBox Content="Run as Administrator" IsChecked="{Binding SelectedItem.IsRunAsAdministrator}"
-                              VerticalAlignment="Center" Grid.Row="2" Margin="3"/>
-                    <Grid Grid.Row="2" Grid.Column="1">
+                    <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Startup Path" />
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="startupPathTextBox" Text="{Binding SelectedItem.StartupPath, UpdateSourceTrigger=PropertyChanged, Delay=250}"/>
+                            <Button Content="..." Grid.Column="1" Padding="5,0" Margin="0,4,3,4" Click="OnBrowseStartupPathButtonClick"/>
+                        </Grid>
+                    </Grid>
+                    <!--<CheckBox Content="Run as Administrator" IsChecked="{Binding SelectedItem.IsRunAsAdministrator}"
+                              VerticalAlignment="Center" Grid.Row="3" Margin="3" />-->
+                    <Grid Grid.Row="3" Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Window Type"/>
                         <ComboBox ItemsSource="{Binding Source={StaticResource windowTypeEnum}}" SelectedValue="{Binding SelectedItem.WindowType}"
-                            Grid.Row="2" Grid.Column="1" Margin="3"/>
+                             Grid.Column="1" Margin="3"/>
                     </Grid>
-                    <Button Content="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedItem}"
-                            Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="5" Padding="18,7"/>
+                    <Button Grid.Row="4" Grid.Column="1" Content="Save" Margin="0,7,0,7" Padding="30,5" HorizontalAlignment="Right" Command="{Binding SelectedItem.SaveCommand}"/>
                 </Grid>
             </GroupBox>
         </Grid>

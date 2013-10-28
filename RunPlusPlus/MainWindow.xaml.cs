@@ -28,14 +28,14 @@ namespace RunPlusPlus
             this.DataContext = new MainWindowViewModel();
         }
 
-        private void OnBrowseButtonClick(object sender, RoutedEventArgs e)
+        private void OnBrowseTargetButtonClick(object sender, RoutedEventArgs e)
         {
-            var dlg = new OpenFileDialog();
-            var isOk = dlg.ShowDialog();
-            if (isOk != null && isOk.Value)
-            {
-                this.commandTextBox.Text = dlg.FileName;
-            }
+            
+        }
+
+        private void OnBrowseStartupPathButtonClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

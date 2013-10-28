@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace RunPlusPlus.Model
 {
-    enum WindowType
+    enum WindowTypes
     {
-        Normal,
-        Minimized,
-        Maximized
+        Normal = 1,
+        Minimized = 7,
+        Maximized = 3
     }
 }
