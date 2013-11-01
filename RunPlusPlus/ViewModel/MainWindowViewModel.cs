@@ -72,6 +72,11 @@ namespace RunPlusPlus.ViewModel
                 {
                     return this.SelectedItem != null;
                 });
+            this.ShowAboutCommand = new RelayCommand(
+                () =>
+                {
+                    Messenger.Default.Send<NotificationMessage>(new NotificationMessage(this, ""), "SHOW_ABOUT");
+                });
         }
         private void RemoveItem()
         {

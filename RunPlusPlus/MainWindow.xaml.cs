@@ -28,8 +28,8 @@ namespace RunPlusPlus
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
             Messenger.Default.Register<NotificationMessage>(this, "UI_MSG", m => MessageBox.Show(m.Notification));
+            Messenger.Default.Register<NotificationMessage>(this, "SHOW_ABOUT", m => new AboutWindow() { Owner = this }.ShowDialog());
         }
-
         private void OnBrowseTargetButtonClick(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog();
