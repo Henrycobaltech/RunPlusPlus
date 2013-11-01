@@ -1,46 +1,38 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using RunPlusPlus.Model;
+using RunPlusPlus.Services;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RunPlusPlus.ViewModel
 {
-    class MainWindowViewModel : ViewModelBase
+    internal class MainWindowViewModel : ViewModelBase
     {
+        private ShortcutViewModel _selectedItem;
+
+        private ObservableCollection<ShortcutViewModel> _shorts = new ObservableCollection<ShortcutViewModel>();
 
         public MainWindowViewModel()
         {
             this.InitializeCommands();
+            LoadShortcuts();
+            ShortcutServices.Saved += (o, e) => this.LoadShortcuts();
         }
 
-        private void InitializeCommands()
+        private void LoadShortcuts()
         {
-            this.AddCommand = new RelayCommand(this.AddItem);
-            this.RemoveCommand = new RelayCommand(this.RemoveItem,
-                () =>
-                {
-                    return this.SelectedItem != null;
-                });
-        }
-
-        private ObservableCollection<ShortcutViewModel> _shorts = new ObservableCollection<ShortcutViewModel>();
-
-        public ObservableCollection<ShortcutViewModel> Shortcuts
-        {
-            get { return _shorts; }
-            set
+            this.Shortcuts.Clear();
+            foreach (var item in ShortcutServices.LoadExistingShortcuts())
             {
-                _shorts = value;
-                this.RaisePropertyChanged();
+                this.Shortcuts.Add(new ShortcutViewModel(item));
             }
         }
 
-        private ShortcutViewModel _selectedItem;
+        public RelayCommand AddCommand { get; set; }
+
+        public RelayCommand RemoveCommand { get; set; }
 
         public ShortcutViewModel SelectedItem
         {
@@ -52,13 +44,17 @@ namespace RunPlusPlus.ViewModel
             }
         }
 
-
-        public RelayCommand AddCommand { get; set; }
-
-        public RelayCommand RemoveCommand { get; set; }
+        public ObservableCollection<ShortcutViewModel> Shortcuts
+        {
+            get { return _shorts; }
+            set
+            {
+                _shorts = value;
+                this.RaisePropertyChanged();
+            }
+        }
 
         public RelayCommand ShowAboutCommand { get; set; }
-
 
         private void AddItem()
         {
@@ -67,6 +63,15 @@ namespace RunPlusPlus.ViewModel
             this.SelectedItem = item;
         }
 
+        private void InitializeCommands()
+        {
+            this.AddCommand = new RelayCommand(this.AddItem);
+            this.RemoveCommand = new RelayCommand(this.RemoveItem,
+                () =>
+                {
+                    return this.SelectedItem != null;
+                });
+        }
         private void RemoveItem()
         {
             var index = this.Shortcuts.IndexOf(this.SelectedItem);

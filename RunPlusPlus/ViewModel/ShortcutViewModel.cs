@@ -3,75 +3,102 @@ using GalaSoft.MvvmLight.Command;
 using RunPlusPlus.Model;
 using RunPlusPlus.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RunPlusPlus.ViewModel
 {
-    class ShortcutViewModel : ViewModelBase
+    internal class ShortcutViewModel : ViewModelBase
     {
+
+        private Shortcut sysShortcut = new Shortcut();
+        private string oldName = "";
 
         public ShortcutViewModel()
         {
             InitializeCommand();
-            this.sysShortcut = new Shortcut();
+        }
+
+        public ShortcutViewModel(Shortcut sysShortcut)
+            : this()
+        {
+            if (string.IsNullOrEmpty(sysShortcut.Name))
+            {
+                throw new ArgumentException("Name of the shortcut can not be null");
+            }
+            this.sysShortcut = sysShortcut;
+            this.oldName = sysShortcut.Name;
+        }
+
+        public string Name
+        {
+            get { return this.sysShortcut.Description; }
+            set
+            {
+                this.sysShortcut.Description = value;
+                this.IsSaved = false;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public RelayCommand SaveCommand { get; set; }
+
+        public string Shortcut
+        {
+            get { return this.sysShortcut.Name; }
+            set
+            {
+                this.sysShortcut.Name = value;
+                this.IsSaved = false;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public string StartupPath
+        {
+            get { return this.sysShortcut.StartupPath; }
+            set
+            {
+                this.sysShortcut.StartupPath = value;
+                this.IsSaved = false;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public string Target
+        {
+            get { return this.sysShortcut.Target; }
+            set
+            {
+                this.sysShortcut.Target = value;
+                this.IsSaved = false;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public WindowTypes WindowType
+        {
+            get { return this.sysShortcut.WindowType; }
+            set
+            {
+                this.sysShortcut.WindowType = value;
+                this.IsSaved = false;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public void Delete()
+        {
+            this.sysShortcut.Delete();
+        }
+
+        private bool Check()
+        {
+            return this.sysShortcut.Check() && (!this.IsSaved);
         }
 
         private void InitializeCommand()
         {
             this.SaveCommand = new RelayCommand(this.Save, this.Check);
         }
-
-        private string _name;
-
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        private string _shortcut;
-
-        public string Shortcut
-        {
-            get { return _shortcut; }
-            set
-            {
-                _shortcut = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        private string target;
-
-        public string Target
-        {
-            get { return target; }
-            set
-            {
-                target = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        private string _startupPath;
-
-        public string StartupPath
-        {
-            get { return _startupPath; }
-            set
-            {
-                _startupPath = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
 
         // will be avaliable in later version
 
@@ -87,48 +114,30 @@ namespace RunPlusPlus.ViewModel
         //    }
         //}
 
-        private WindowTypes _windowType = WindowTypes.Normal;
-
-        public WindowTypes WindowType
-        {
-            get { return _windowType; }
-            set
-            {
-                _windowType = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-
-        private Shortcut sysShortcut;
-
-        public RelayCommand SaveCommand { get; set; }
-
         private void Save()
         {
             if (this.Check())
             {
-                this.sysShortcut.Save();
+                this.sysShortcut.Save(this.oldName);
+                this.oldName = this.sysShortcut.Name;
+                this.IsSaved = true;
             }
             else
             {
                 throw new ArgumentException();
             }
-
         }
+        private bool _isSaved = true;
 
-        private bool Check()
+        public bool IsSaved
         {
-            this.sysShortcut.Name = this.Shortcut;
-            this.sysShortcut.Description = this.Name;
-            this.sysShortcut.Target = this.Target;
-            this.sysShortcut.StartupPath = this.StartupPath;
-            return this.sysShortcut.Check();
+            get { return _isSaved; }
+            set
+            {
+                _isSaved = value;
+                this.RaisePropertyChanged();
+            }
         }
 
-        public void Delete()
-        {
-            this.sysShortcut.Delete();
-        }
     }
 }

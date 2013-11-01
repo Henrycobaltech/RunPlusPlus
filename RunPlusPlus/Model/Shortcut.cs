@@ -8,6 +8,11 @@ namespace RunPlusPlus.Model
 {
     class Shortcut
     {
+
+        public Shortcut()
+        {
+            this.WindowType = WindowTypes.Normal;
+        }
         public string Description { get; set; }
         public string Name { get; set; }
         public string Target { get; set; }
