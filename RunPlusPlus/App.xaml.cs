@@ -21,7 +21,9 @@ namespace RunPlusPlus
             System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\RunPlusPlus\Data\");
 #endif
             ShortcutServices.InitializeEnvironmentVariable();
-        }
 
+            this.DispatcherUnhandledException += (o, ev) => MessageBox.Show(ev.Exception.ToString());
+
+        }
     }
 }

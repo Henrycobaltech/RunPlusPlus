@@ -12,6 +12,9 @@
             <TextBlock Text="Run ++" FontSize="30"/>
             <TextBlock x:Name="versionText"/>
         </StackPanel>
+        <TextBlock Grid.Row="1" Margin="10">
+            Run ++ Developer Preview
+        </TextBlock>
         <TextBlock Grid.Row="2" Margin="10">
             <Hyperlink NavigateUri="http://rpp.codeplex.com/" Click="HyperLinkClick">
                 <TextBlock Text="http://rpp.codeplex.com/"/>
