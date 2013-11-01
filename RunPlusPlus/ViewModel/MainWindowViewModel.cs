@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using RunPlusPlus.Services;
 using System;
 using System.Collections.ObjectModel;
@@ -18,7 +19,7 @@ namespace RunPlusPlus.ViewModel
         {
             this.InitializeCommands();
             LoadShortcuts();
-            ShortcutServices.Saved += (o, e) => this.LoadShortcuts();
+            ShortcutServices.Changed += (o, e) => this.LoadShortcuts();
         }
 
         private void LoadShortcuts()

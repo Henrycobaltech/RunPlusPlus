@@ -13,9 +13,25 @@ namespace RunPlusPlus.Services
 
         private static readonly string dataFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\RunPlusPlus\Data\";
 
-        internal static event EventHandler Saved;
+        internal static event EventHandler Changed;
 
-        public static IEnumerable<Shortcut> LoadExistingShortcuts()
+        internal static void InitializeEnvironmentVariable()
+        {
+            var path = dataFolderPath + @";";
+
+            var sysPath = Environment.GetEnvironmentVariable("path", EnvironmentVariableTarget.User);
+            if (sysPath == null || !sysPath.Contains(path))
+            {
+                if (sysPath != null && sysPath.Last() != ';')
+                {
+                    sysPath += ';';
+                }
+                sysPath += path;
+            }
+            Environment.SetEnvironmentVariable("path", sysPath, EnvironmentVariableTarget.User);
+        }
+
+        internal static IEnumerable<Shortcut> LoadExistingShortcuts()
         {
             DirCheck();
             var dir = new DirectoryInfo(dataFolderPath);
@@ -36,6 +52,7 @@ namespace RunPlusPlus.Services
             }
         }
 
+        #region ShortcutExtensionMethods
         internal static bool Check(this Shortcut shortcut)
         {
             if (string.IsNullOrEmpty(shortcut.Name) ||
@@ -58,6 +75,7 @@ namespace RunPlusPlus.Services
         {
             var path = GetShortcutPath(shortcut);
             System.IO.File.Delete(path);
+            RaiseChanged();
         }
 
         internal static void Save(this Shortcut shortcut, string existingShortctName = "")
@@ -67,13 +85,16 @@ namespace RunPlusPlus.Services
                 ThrowIfExists(shortcut.Name);
             }
             if (!string.IsNullOrEmpty(existingShortctName)
-                && existingShortctName != shortcut.Name)
+                && existingShortctName != shortcut.Name
+                && System.IO.File.Exists(GetShortcutPath(existingShortctName)))
             {
                 System.IO.File.Move(GetShortcutPath(existingShortctName), GetShortcutPath(shortcut));
             }
             SaveShortcut(shortcut);
         }
+        #endregion
 
+        #region EssentialMethods
         private static void ThrowIfExists(string name)
         {
             if (System.IO.File.Exists(GetShortcutPath(name)))
@@ -100,6 +121,12 @@ namespace RunPlusPlus.Services
             return dataFolderPath + name + @".lnk";
         }
 
+        private static void RaiseChanged()
+        {
+            Changed(null, new EventArgs());
+        }
+        #endregion
+
         private static void SaveShortcut(Shortcut shortcut)
         {
             DirCheck();
@@ -111,7 +138,7 @@ namespace RunPlusPlus.Services
             sc.WindowStyle = (int)shortcut.WindowType;
             sc.WorkingDirectory = shortcut.StartupPath;
             sc.Save();
-            Saved(null, new EventArgs());
+            RaiseChanged();
         }
     }
 }

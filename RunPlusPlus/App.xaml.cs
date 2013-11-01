@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RunPlusPlus.Services;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -17,21 +18,10 @@ namespace RunPlusPlus
         {
             base.OnStartup(e);
 #if DEBUG
-            System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                + @"\RunPlusPlus\Data\");
+            System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\RunPlusPlus\Data\");
 #endif
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\RunPlusPlus\Data;";
-
-            var sysPath = Environment.GetEnvironmentVariable("path", EnvironmentVariableTarget.User);
-            if (sysPath == null || !sysPath.Contains(path))
-            {
-                if (sysPath != null && sysPath.Last() != ';')
-                {
-                    sysPath += ';';
-                }
-                sysPath += path;
-            }
-            Environment.SetEnvironmentVariable("path", sysPath, EnvironmentVariableTarget.User);
+            ShortcutServices.InitializeEnvironmentVariable();
         }
+
     }
 }

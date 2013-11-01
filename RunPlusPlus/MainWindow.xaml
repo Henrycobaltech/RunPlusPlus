@@ -123,7 +123,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="startupPathTextBox" Text="{Binding SelectedItem.StartupPath, UpdateSourceTrigger=PropertyChanged, Delay=250}"/>
-                            <Button Content="..." Grid.Column="1" Padding="5,0" Margin="0,4,3,4" Click="OnBrowseStartupPathButtonClick"/>
+                            <Button Content="..." Grid.Column="1" Padding="5,0" Margin="0,0,3,4" Click="OnBrowseStartupPathButtonClick" Height="21" VerticalAlignment="Bottom"/>
                         </Grid>
                     </Grid>
                     <!--<CheckBox Content="Run as Administrator" IsChecked="{Binding SelectedItem.IsRunAsAdministrator}"

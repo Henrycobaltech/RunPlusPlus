@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using RunPlusPlus.Model;
 using RunPlusPlus.Services;
 using System;
@@ -26,20 +27,22 @@ namespace RunPlusPlus.ViewModel
             }
             this.sysShortcut = sysShortcut;
             this.oldName = sysShortcut.Name;
+            this.IsExisting = true;
         }
 
+        #region UIProperties
         public string Name
         {
             get { return this.sysShortcut.Description; }
             set
             {
                 this.sysShortcut.Description = value;
-                this.IsSaved = false;
+                this.ChangesPending = true;
                 this.RaisePropertyChanged();
             }
         }
 
-        public RelayCommand SaveCommand { get; set; }
+
 
         public string Shortcut
         {
@@ -47,7 +50,7 @@ namespace RunPlusPlus.ViewModel
             set
             {
                 this.sysShortcut.Name = value;
-                this.IsSaved = false;
+                this.ChangesPending = true;
                 this.RaisePropertyChanged();
             }
         }
@@ -58,7 +61,7 @@ namespace RunPlusPlus.ViewModel
             set
             {
                 this.sysShortcut.StartupPath = value;
-                this.IsSaved = false;
+                this.ChangesPending = true;
                 this.RaisePropertyChanged();
             }
         }
@@ -69,7 +72,7 @@ namespace RunPlusPlus.ViewModel
             set
             {
                 this.sysShortcut.Target = value;
-                this.IsSaved = false;
+                this.ChangesPending = true;
                 this.RaisePropertyChanged();
             }
         }
@@ -80,19 +83,30 @@ namespace RunPlusPlus.ViewModel
             set
             {
                 this.sysShortcut.WindowType = value;
-                this.IsSaved = false;
+                this.ChangesPending = true;
                 this.RaisePropertyChanged();
             }
         }
 
-        public void Delete()
+
+
+        private bool _changesPending;
+
+        public bool ChangesPending
         {
-            this.sysShortcut.Delete();
+            get { return _changesPending; }
+            private set
+            {
+                _changesPending = value;
+                this.RaisePropertyChanged();
+            }
         }
+
+        public bool IsExisting { get; private set; }
 
         private bool Check()
         {
-            return this.sysShortcut.Check() && (!this.IsSaved);
+            return this.sysShortcut.Check() && this.ChangesPending;
         }
 
         private void InitializeCommand()
@@ -114,30 +128,35 @@ namespace RunPlusPlus.ViewModel
         //    }
         //}
 
+
+        #endregion
+
+        public RelayCommand SaveCommand { get; set; }
         private void Save()
         {
             if (this.Check())
             {
-                this.sysShortcut.Save(this.oldName);
-                this.oldName = this.sysShortcut.Name;
-                this.IsSaved = true;
-            }
-            else
-            {
-                throw new ArgumentException();
+
+                try
+                {
+                    this.sysShortcut.Save(this.oldName);
+                    this.IsExisting = true;
+                    this.oldName = this.sysShortcut.Name;
+                    this.ChangesPending = false;
+                }
+                catch (InvalidOperationException ex)
+                {
+
+                    Messenger.Default.Send(new NotificationMessage(this, ex.Message), "UI_MSG");
+                }
             }
         }
-        private bool _isSaved = true;
-
-        public bool IsSaved
+        public void Delete()
         {
-            get { return _isSaved; }
-            set
+            if (this.IsExisting)
             {
-                _isSaved = value;
-                this.RaisePropertyChanged();
+                this.sysShortcut.Delete();
             }
         }
-
     }
 }

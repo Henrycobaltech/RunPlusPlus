@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Win32;
 using RunPlusPlus.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -26,16 +27,25 @@ namespace RunPlusPlus
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
+            Messenger.Default.Register<NotificationMessage>(this, "UI_MSG", m => MessageBox.Show(m.Notification));
         }
 
         private void OnBrowseTargetButtonClick(object sender, RoutedEventArgs e)
         {
-            
+            var dlg = new OpenFileDialog();
+            if ((bool)dlg.ShowDialog())
+            {
+                this.targetTextBox.Text = dlg.FileName;
+            }
         }
 
         private void OnBrowseStartupPathButtonClick(object sender, RoutedEventArgs e)
         {
-
+            var dlg = new System.Windows.Forms.FolderBrowserDialog();
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                this.startupPathTextBox.Text = dlg.SelectedPath;
+            }
         }
     }
 }
