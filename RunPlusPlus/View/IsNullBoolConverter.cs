@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace RunPlusPlus
+namespace RunPlusPlus.View
 {
     internal class IsNullBoolConverter : IValueConverter
     {

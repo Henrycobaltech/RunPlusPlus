@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Product Id="8991A92D-240B-4522-96CA-39B6F9738A3E" Name="Run ++" Language="1033" Version="1.0.0.0" Manufacturer="HenryZhu" UpgradeCode="70d6fcae-3b5c-43db-b94f-0a44c79d2b1d">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <Media Id="1" Cabinet="cab1.cab" EmbedCab="yes"/>
+    <UIRef Id="WixUI_InstallDir"/>
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER"/>
+    <WixVariable Id="WixUILicenseRtf" Value="eula.rtf" />
+
+    <Feature Id="ProductFeature" Title="Run ++ core files" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="AppShortcut"/>
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="RunPlusPlus" />
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="Run ++"/>
+      </Directory>
+    </Directory>
+
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+      <!-- <Component Id="ProductComponent"> -->
+      <!-- TODO: Insert files, registry keys, and other resources here. -->
+      <!-- </Component> -->
+      <Component Id="MainComponent" Guid="9C852B04-61A7-4357-A15C-FF1273CD629C">
+        <File Id="RunPlusPlus.exe" Name="$(var.RunPlusPlus.TargetFileName)" Source="$(var.RunPlusPlus.TargetPath)" />
+        <File Source="..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\net45\GalaSoft.MvvmLight.dll"/>
+        <File Source="..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\net45\GalaSoft.MvvmLight.Extras.dll"/>
+        <File Source="..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\net45\GalaSoft.MvvmLight.Platform.Net45.dll"/>
+        <File Source="..\packages\Unofficial.Blend.Interactivity.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll"/>
+        <File Source="..\packages\Unofficial.Blend.Interactivity.1.0.0\lib\net45\System.Windows.Interactivity.dll"/>
+        <File Source="..\packages\Portable.CommonServiceLocator.1.2.2\lib\portable-net4+sl4+wp7+win8\Microsoft.Practices.ServiceLocation.dll"/>
+
+      </Component>
+    </ComponentGroup>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="AppShortcut">
+        <Shortcut Id="RunPlusPlusStartMenuShortcut" Name="Run ++" Target="[#RunPlusPlus.exe]" Directory="ApplicationProgramsFolder" WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\RunPlusPlus" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+</Wix>

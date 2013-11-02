@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RunPlusPlus.Services
 {
@@ -15,20 +16,23 @@ namespace RunPlusPlus.Services
 
         internal static event EventHandler Changed;
 
-        internal static void InitializeEnvironmentVariable()
+        internal static Task InitializeEnvironmentVariable()
         {
-            var path = dataFolderPath + @";";
-
-            var sysPath = Environment.GetEnvironmentVariable("path", EnvironmentVariableTarget.User);
-            if (sysPath == null || !sysPath.Contains(path))
+            return Task.Factory.StartNew(() =>
             {
-                if (sysPath != null && sysPath.Last() != ';')
+                var path = dataFolderPath + @";";
+
+                var sysPath = Environment.GetEnvironmentVariable("path", EnvironmentVariableTarget.User);
+                if (sysPath == null || !sysPath.Contains(path))
                 {
-                    sysPath += ';';
+                    if (sysPath != null && sysPath.Last() != ';')
+                    {
+                        sysPath += ';';
+                    }
+                    sysPath += path;
                 }
-                sysPath += path;
-            }
-            Environment.SetEnvironmentVariable("path", sysPath, EnvironmentVariableTarget.User);
+                Environment.SetEnvironmentVariable("path", sysPath, EnvironmentVariableTarget.User);
+            });
         }
 
         internal static IEnumerable<Shortcut> LoadExistingShortcuts()
@@ -51,6 +55,7 @@ namespace RunPlusPlus.Services
                 yield return shortcut;
             }
         }
+
 
         #region ShortcutExtensionMethods
         internal static bool Check(this Shortcut shortcut)
@@ -129,6 +134,7 @@ namespace RunPlusPlus.Services
 
         private static void SaveShortcut(Shortcut shortcut)
         {
+
             DirCheck();
             var path = GetShortcutPath(shortcut);
             var shell = new WshShell();
@@ -137,8 +143,8 @@ namespace RunPlusPlus.Services
             sc.TargetPath = shortcut.Target;
             sc.WindowStyle = (int)shortcut.WindowType;
             sc.WorkingDirectory = shortcut.StartupPath;
-            sc.Save();
-            RaiseChanged();
+            sc.Save(); RaiseChanged();
+
         }
     }
 }

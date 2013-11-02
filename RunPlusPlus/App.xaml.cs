@@ -14,14 +14,10 @@ namespace RunPlusPlus
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
+        protected async override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-#if DEBUG
-            System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\RunPlusPlus\Data\");
-#endif
-            ShortcutServices.InitializeEnvironmentVariable();
-
+            await ShortcutServices.InitializeEnvironmentVariable();
             this.DispatcherUnhandledException += (o, ev) => MessageBox.Show(ev.Exception.ToString());
 
         }
