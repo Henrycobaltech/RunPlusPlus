@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunPlusPlus", "RunPlusPlus\
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "RunPlusPlus.Setup", "RunPlusPlus.Setup\RunPlusPlus.Setup.wixproj", "{5030D8C8-8449-4777-98DF-FE1FDF6B030D}"
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "RunPlusPlus.Setup.Bootstrapper", "RunPlusPlus.Setup.Bootstrapper\RunPlusPlus.Setup.Bootstrapper.wixproj", "{B63E296A-4EDC-4672-8127-101935E0CDAC}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs24
 		SccLocalPath0 = .
@@ -19,6 +21,9 @@ Global
 		SccProjectUniqueName2 = RunPlusPlus.Setup\\RunPlusPlus.Setup.wixproj
 		SccProjectName2 = RunPlusPlus.Setup
 		SccLocalPath2 = RunPlusPlus.Setup
+		SccProjectUniqueName3 = RunPlusPlus.Setup.Bootstrapper\\RunPlusPlus.Setup.Bootstrapper.wixproj
+		SccProjectName3 = RunPlusPlus.Setup.Bootstrapper
+		SccLocalPath3 = RunPlusPlus.Setup.Bootstrapper
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +54,16 @@ Global
 		{5030D8C8-8449-4777-98DF-FE1FDF6B030D}.Release|Mixed Platforms.Build.0 = Release|x86
 		{5030D8C8-8449-4777-98DF-FE1FDF6B030D}.Release|x86.ActiveCfg = Release|x86
 		{5030D8C8-8449-4777-98DF-FE1FDF6B030D}.Release|x86.Build.0 = Release|x86
+		{B63E296A-4EDC-4672-8127-101935E0CDAC}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B63E296A-4EDC-4672-8127-101935E0CDAC}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{B63E296A-4EDC-4672-8127-101935E0CDAC}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{B63E296A-4EDC-4672-8127-101935E0CDAC}.Debug|x86.ActiveCfg = Debug|x86
+		{B63E296A-4EDC-4672-8127-101935E0CDAC}.Debug|x86.Build.0 = Debug|x86
+		{B63E296A-4EDC-4672-8127-101935E0CDAC}.Release|Any CPU.ActiveCfg = Release|x86
+		{B63E296A-4EDC-4672-8127-101935E0CDAC}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{B63E296A-4EDC-4672-8127-101935E0CDAC}.Release|Mixed Platforms.Build.0 = Release|x86
+		{B63E296A-4EDC-4672-8127-101935E0CDAC}.Release|x86.ActiveCfg = Release|x86
+		{B63E296A-4EDC-4672-8127-101935E0CDAC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

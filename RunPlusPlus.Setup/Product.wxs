@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-  <Product Id="8991A92D-240B-4522-96CA-39B6F9738A3E" Name="Run ++" Language="1033" Version="1.0.0.0" Manufacturer="HenryZhu" UpgradeCode="70d6fcae-3b5c-43db-b94f-0a44c79d2b1d">
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:netfx="http://wixtoolset.org/schemas/v4/wxs/NetFxExtension">
+  <Product Id="*" Name="Run ++" Language="1033" Version="!(bind.FileVersion.RunPlusPlus.exe)"  Manufacturer="HenryZhu" UpgradeCode="85BAF8D6-9917-425E-BEF8-F234ADA9F36E">
+    
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
     <Media Id="1" Cabinet="cab1.cab" EmbedCab="yes"/>
     <UIRef Id="WixUI_InstallDir"/>
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER"/>
     <WixVariable Id="WixUILicenseRtf" Value="eula.rtf" />
+
+    <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit."/>
+
+    <PropertyRef Id="NETFRAMEWORK45"/>
+
+    <Condition Message="This application requires .NET Framework 4.5. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK45]]>
+    </Condition>
 
     <Feature Id="ProductFeature" Title="Run ++ core files" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
@@ -40,7 +49,6 @@
         <File Source="..\packages\Unofficial.Blend.Interactivity.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll"/>
         <File Source="..\packages\Unofficial.Blend.Interactivity.1.0.0\lib\net45\System.Windows.Interactivity.dll"/>
         <File Source="..\packages\Portable.CommonServiceLocator.1.2.2\lib\portable-net4+sl4+wp7+win8\Microsoft.Practices.ServiceLocation.dll"/>
-
       </Component>
     </ComponentGroup>
     <DirectoryRef Id="ApplicationProgramsFolder">

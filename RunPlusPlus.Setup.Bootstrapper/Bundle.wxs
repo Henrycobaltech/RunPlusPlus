@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" 
+     xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
+  <Bundle Name="Run ++" Version="!(bind.PackageVersion.MainMSI)" Manufacturer="Henry Zhu" UpgradeCode="b63e296a-4edc-4672-8127-101935e0cdac">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLargeLicense">
+      <bal:WixStandardBootstrapperApplication LicenseFile="eula.rtf"/>
+    </BootstrapperApplicationRef>
+    
+    <Chain>
+      <!-- TODO: Define the list of chained packages. -->
+      <!-- <MsiPackage SourceFile="path\to\your.msi" /> -->
+      <PackageGroupRef Id="NetFx45Web"/>
+      <MsiPackage Id="MainMSI" SourceFile="$(var.RunPlusPlus.Setup.TargetPath)"/>
+    </Chain>
+  </Bundle>
+</Wix>
