@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?define ProductName="Run ++ Beta"?>
+
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:netfx="http://wixtoolset.org/schemas/v4/wxs/NetFxExtension">
-  <Product Id="*" Name="Run ++" Language="1033" Version="!(bind.FileVersion.RunPlusPlus.exe)"  Manufacturer="HenryZhu" UpgradeCode="85BAF8D6-9917-425E-BEF8-F234ADA9F36E">
-    
+  <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="!(bind.FileVersion.RunPlusPlus.exe)"  Manufacturer="HenryZhu" UpgradeCode="85BAF8D6-9917-425E-BEF8-F234ADA9F36E">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
     <Media Id="1" Cabinet="cab1.cab" EmbedCab="yes"/>
     <UIRef Id="WixUI_InstallDir"/>
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER"/>
     <WixVariable Id="WixUILicenseRtf" Value="eula.rtf" />
 
-    <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit."/>
-
+    <MajorUpgrade AllowSameVersionUpgrades="no" DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit."/>
     <PropertyRef Id="NETFRAMEWORK45"/>
 
     <Condition Message="This application requires .NET Framework 4.5. Please install the .NET Framework then run this installer again.">
@@ -29,7 +30,7 @@
       </Directory>
 
       <Directory Id="ProgramMenuFolder">
-        <Directory Id="ApplicationProgramsFolder" Name="Run ++"/>
+        <Directory Id="ApplicationProgramsFolder" Name="$(var.ProductName)"/>
       </Directory>
     </Directory>
 
@@ -42,7 +43,8 @@
       <!-- TODO: Insert files, registry keys, and other resources here. -->
       <!-- </Component> -->
       <Component Id="MainComponent" Guid="9C852B04-61A7-4357-A15C-FF1273CD629C">
-        <File Id="RunPlusPlus.exe" Name="$(var.RunPlusPlus.TargetFileName)" Source="$(var.RunPlusPlus.TargetPath)" />
+        <Shortcut Id="RunPlusPlusStartMenuShortcut" Name="$(var.ProductName)"  Advertise="yes"  Directory="ApplicationProgramsFolder" WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
+        <File Id="RunPlusPlus.exe" Name="$(var.RunPlusPlus.TargetFileName)" Source="$(var.RunPlusPlus.TargetPath)" KeyPath="yes"/>
         <File Source="..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\net45\GalaSoft.MvvmLight.dll"/>
         <File Source="..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\net45\GalaSoft.MvvmLight.Extras.dll"/>
         <File Source="..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\net45\GalaSoft.MvvmLight.Platform.Net45.dll"/>
@@ -53,7 +55,7 @@
     </ComponentGroup>
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="AppShortcut">
-        <Shortcut Id="RunPlusPlusStartMenuShortcut" Name="Run ++" Target="[#RunPlusPlus.exe]" Directory="ApplicationProgramsFolder" WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
+        <!--Target="[#RunPlusPlus.exe]"-->
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\RunPlusPlus" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
