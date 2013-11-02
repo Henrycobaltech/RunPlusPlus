@@ -4,7 +4,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:model="clr-namespace:RunPlusPlus.Model"
         xmlns:local="clr-namespace:RunPlusPlus.View"
-        Title="Run ++" Height="470" Width="745" MinHeight="460" MinWidth="680" WindowStartupLocation="CenterScreen" FontSize="14" Background="Transparent">
+        Title="Run ++" Height="550" Width="745" MinHeight="530" MinWidth="680" WindowStartupLocation="CenterScreen" FontSize="14" Background="Transparent">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="15,70,15,15" CaptionHeight="50" />
     </WindowChrome.WindowChrome>
@@ -41,6 +41,7 @@
                             <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}"/>
                             <GridViewColumn Header="Shortcut" Width="70" DisplayMemberBinding="{Binding Shortcut}"/>
                             <GridViewColumn Header="Target" Width="250" DisplayMemberBinding="{Binding Target}"/>
+                            <GridViewColumn Header="Arguments" Width="250" DisplayMemberBinding="{Binding Arguments}"/>
                             <GridViewColumn Header="Startup Path" Width="250" DisplayMemberBinding="{Binding StartupPath}"/>
                             <!--<GridViewColumn Header="Admin" DisplayMemberBinding="{Binding IsRunAsAdministrator}"/>-->
                             <GridViewColumn Header="Window Type" DisplayMemberBinding="{Binding WindowType}"/>
@@ -74,6 +75,7 @@
                         </Style>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
+                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -122,6 +124,14 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
+                        <TextBlock Text="Arguments"/>
+                        <TextBox Grid.Column="1" Text="{Binding SelectedItem.Arguments, UpdateSourceTrigger=PropertyChanged, Delay=250}"/>
+                    </Grid>
+                    <Grid Grid.Row="3" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
                         <TextBlock Text="Startup Path" />
                         <Grid Grid.Column="1">
                             <Grid.ColumnDefinitions>
@@ -134,7 +144,7 @@
                     </Grid>
                     <!--<CheckBox Content="Run as Administrator" IsChecked="{Binding SelectedItem.IsRunAsAdministrator}"
                               VerticalAlignment="Center" Grid.Row="3" Margin="3" />-->
-                    <Grid Grid.Row="3" Grid.Column="1">
+                    <Grid Grid.Row="4" Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition />
@@ -143,7 +153,7 @@
                         <ComboBox ItemsSource="{Binding Source={StaticResource windowTypeEnum}}" SelectedValue="{Binding SelectedItem.WindowType}"
                              Grid.Column="1" Margin="3"/>
                     </Grid>
-                    <Button Grid.Row="4" Grid.Column="1" Content="Save" Margin="0,7,0,7"  Padding="30,7" HorizontalAlignment="Right" Command="{Binding SelectedItem.SaveCommand}"/>
+                    <Button Grid.Row="5" Grid.Column="1" Content="Save" Margin="0,7,0,7"  Padding="30,7" HorizontalAlignment="Right" Command="{Binding SelectedItem.SaveCommand}"/>
                 </Grid>
             </GroupBox>
         </Grid>

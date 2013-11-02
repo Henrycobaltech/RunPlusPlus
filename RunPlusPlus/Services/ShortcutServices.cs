@@ -49,6 +49,7 @@ namespace RunPlusPlus.Services
                     Name = item.Name.Replace(@".lnk", ""),
                     Description = sc.Description,
                     Target = sc.TargetPath,
+                    Arguments = sc.Arguments,
                     WindowType = (WindowTypes)sc.WindowStyle,
                     StartupPath = sc.WorkingDirectory,
                 };
@@ -141,6 +142,7 @@ namespace RunPlusPlus.Services
             var sc = (IWshShortcut)shell.CreateShortcut(path);
             sc.Description = shortcut.Description;
             sc.TargetPath = shortcut.Target;
+            sc.Arguments = shortcut.Arguments;
             sc.WindowStyle = (int)shortcut.WindowType;
             sc.WorkingDirectory = shortcut.StartupPath;
             sc.Save(); RaiseChanged();

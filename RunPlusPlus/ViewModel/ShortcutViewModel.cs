@@ -77,6 +77,19 @@ namespace RunPlusPlus.ViewModel
             }
         }
 
+
+        public string Arguments
+        {
+            get { return this.sysShortcut.Arguments; }
+            set
+            {
+                this.sysShortcut.Arguments = value;
+                this.ChangesPending = true;
+                this.RaisePropertyChanged();
+            }
+        }
+
+
         public WindowTypes WindowType
         {
             get { return this.sysShortcut.WindowType; }
