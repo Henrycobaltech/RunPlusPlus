@@ -5,9 +5,6 @@
         xmlns:model="clr-namespace:RunPlusPlus.Model"
         xmlns:local="clr-namespace:RunPlusPlus.View"
         Title="Run ++" Height="550" Width="745" MinHeight="530" MinWidth="680" WindowStartupLocation="CenterScreen" FontSize="14" Background="Transparent">
-    <WindowChrome.WindowChrome>
-        <WindowChrome GlassFrameThickness="15,70,15,15" CaptionHeight="50" />
-    </WindowChrome.WindowChrome>
     <Window.Resources>
         <ObjectDataProvider x:Key="windowTypeEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>

@@ -18,7 +18,7 @@ namespace RunPlusPlus
         {
             base.OnStartup(e);
             await ShortcutServices.InitializeEnvironmentVariable();
-            this.DispatcherUnhandledException += (o, ev) => MessageBox.Show(ev.Exception.ToString());
+            this.DispatcherUnhandledException += (o, ev) => MessageBox.Show(ev.Exception.ToString(), "Unhandled exception", MessageBoxButton.OK, MessageBoxImage.Error);
 
         }
     }
