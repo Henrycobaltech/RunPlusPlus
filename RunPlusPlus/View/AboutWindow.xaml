@@ -9,11 +9,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Margin="10">
-            <TextBlock Text="Run ++" FontSize="30"/>
+            <TextBlock Text="Run ++ 1.0" FontSize="30"/>
             <TextBlock x:Name="versionText"/>
         </StackPanel>
-        <TextBlock Grid.Row="1" Margin="10">
-            Run ++ Beta
+        <TextBlock Grid.Row="1" Margin="10" TextWrapping="WrapWithOverflow">
+            This computer program is protected by copyright law and international treaties.Unauthorized reproduction or distribution of this program, or any portion of it, may result inseverecivil and criminal penalties, and will be prosecuted to the maximum extent possible under thelaw.
         </TextBlock>
         <TextBlock Grid.Row="2" Margin="10">
             <Hyperlink NavigateUri="http://rpp.codeplex.com/" Click="HyperLinkClick">

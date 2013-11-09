@@ -25,10 +25,11 @@ namespace RunPlusPlus.View
         public AboutWindow()
         {
             InitializeComponent();
-            this.versionText.Text = "Version: " + version.ToString();
+            var copyright = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>().Copyright;
+            this.versionText.Text = "Version: " + assembly.GetName().Version.ToString() + "\n" + copyright;
         }
 
-        static readonly Version version = Assembly.GetAssembly(typeof(AboutWindow)).GetName().Version;
+        static readonly Assembly assembly = Assembly.GetAssembly(typeof(AboutWindow));
 
         private void HyperLinkClick(object sender, RoutedEventArgs e)
         {

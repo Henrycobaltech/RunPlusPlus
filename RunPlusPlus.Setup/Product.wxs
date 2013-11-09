@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?define ProductName="Run ++ Beta"?>
+<?define ProductName="Run ++"?>
 
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:netfx="http://wixtoolset.org/schemas/v4/wxs/NetFxExtension">
   <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="!(bind.FileVersion.RunPlusPlus.exe)"  Manufacturer="HenryZhu" UpgradeCode="85BAF8D6-9917-425E-BEF8-F234ADA9F36E">
@@ -15,6 +15,9 @@
 
     <Condition Message="This application requires .NET Framework 4.5. Please install the .NET Framework then run this installer again.">
       <![CDATA[Installed OR NETFRAMEWORK45]]>
+    </Condition>
+    <Condition Message="This application is only supported on Windows 7, Windows Server 2008 R2, or higher.">
+      <![CDATA[Installed OR (VersionNT >= 601)]]>
     </Condition>
 
     <Feature Id="ProductFeature" Title="Run ++ core files" Level="1">
@@ -37,14 +40,16 @@
   </Fragment>
 
   <Fragment>
+    <Icon Id="AppIcon.ico" SourceFile="$(var.RunPlusPlus.TargetPath)"/>
     <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
       <!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
       <!-- <Component Id="ProductComponent"> -->
       <!-- TODO: Insert files, registry keys, and other resources here. -->
       <!-- </Component> -->
       <Component Id="MainComponent" Guid="9C852B04-61A7-4357-A15C-FF1273CD629C">
-        <Shortcut Id="RunPlusPlusStartMenuShortcut" Name="$(var.ProductName)"  Advertise="yes"  Directory="ApplicationProgramsFolder" WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
-        <File Id="RunPlusPlus.exe" Name="$(var.RunPlusPlus.TargetFileName)" Source="$(var.RunPlusPlus.TargetPath)" KeyPath="yes"/>
+        <File Id="RunPlusPlus.exe" Name="$(var.RunPlusPlus.TargetFileName)" Source="$(var.RunPlusPlus.TargetPath)" KeyPath="yes">
+          <Shortcut Id="RunPlusPlusStartMenuShortcut" Name="$(var.ProductName)" Icon="AppIcon.ico" IconIndex="0" Advertise="yes"  Directory="ApplicationProgramsFolder" WorkingDirectory="INSTALLFOLDER"/>
+        </File>
         <File Source="..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\net45\GalaSoft.MvvmLight.dll"/>
         <File Source="..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\net45\GalaSoft.MvvmLight.Extras.dll"/>
         <File Source="..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\net45\GalaSoft.MvvmLight.Platform.Net45.dll"/>

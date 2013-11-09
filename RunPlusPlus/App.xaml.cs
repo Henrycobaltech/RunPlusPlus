@@ -17,6 +17,12 @@ namespace RunPlusPlus
         protected async override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            if (Environment.OSVersion.Version < new Version(6, 1))
+            {
+                MessageBox.Show("This application is only supported on Windows 7, Windows Server 2008 R2, or higher",
+                    "Unsupported OS", MessageBoxButton.OK, MessageBoxImage.Error);
+                App.Current.Shutdown();
+            }
             await ShortcutServices.InitializeEnvironmentVariable();
             this.DispatcherUnhandledException += (o, ev) => MessageBox.Show(ev.Exception.ToString(), "Unhandled exception", MessageBoxButton.OK, MessageBoxImage.Error);
 

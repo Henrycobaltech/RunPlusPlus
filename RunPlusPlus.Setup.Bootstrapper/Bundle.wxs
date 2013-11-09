@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?define ProductName="Run ++ Beta"?>
+<?define ProductName="Run ++"?>
 
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" 
      xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
-  <Bundle Name="$(var.ProductName)" Version="!(bind.PackageVersion.MainMSI)" Manufacturer="Henry Zhu" UpgradeCode="b63e296a-4edc-4672-8127-101935e0cdac">
+  <Bundle Name="$(var.ProductName)" Version="!(bind.PackageVersion.MainMSI)" Manufacturer="Henry Zhu" UpgradeCode="85BAF8D6-9917-425E-BEF8-F234ADA9F36E">
     <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLargeLicense">
       <bal:WixStandardBootstrapperApplication LicenseFile="eula.rtf"/>
     </BootstrapperApplicationRef>
