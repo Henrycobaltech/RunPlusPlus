@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace RunPlusPlus.Services
 {
@@ -16,23 +16,19 @@ namespace RunPlusPlus.Services
 
         internal static event EventHandler Changed;
 
-        internal static Task InitializeEnvironmentVariable()
+        internal static void InitializeEnvironmentVariable()
         {
-            return Task.Factory.StartNew(() =>
+            var sysPath = Environment.GetEnvironmentVariable("path", EnvironmentVariableTarget.User);
+            var sb = new StringBuilder(sysPath);
+            if (sysPath == null || !sysPath.Contains(dataFolderPath))
             {
-                var path = dataFolderPath + @";";
-
-                var sysPath = Environment.GetEnvironmentVariable("path", EnvironmentVariableTarget.User);
-                if (sysPath == null || !sysPath.Contains(path))
+                if (sysPath != null && sysPath.Last() != ';')
                 {
-                    if (sysPath != null && sysPath.Last() != ';')
-                    {
-                        sysPath += ';';
-                    }
-                    sysPath += path;
+                    sb.Append(";");
                 }
-                Environment.SetEnvironmentVariable("path", sysPath, EnvironmentVariableTarget.User);
-            });
+                sb.Append(dataFolderPath).Append(";");
+            }
+            Environment.SetEnvironmentVariable("path", sb.ToString(), EnvironmentVariableTarget.User);
         }
 
         internal static IEnumerable<Shortcut> LoadExistingShortcuts()
@@ -145,8 +141,8 @@ namespace RunPlusPlus.Services
             sc.Arguments = shortcut.Arguments;
             sc.WindowStyle = (int)shortcut.WindowType;
             sc.WorkingDirectory = shortcut.StartupPath;
-            sc.Save(); RaiseChanged();
-
+            sc.Save();
+            RaiseChanged();
         }
     }
 }

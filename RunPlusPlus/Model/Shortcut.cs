@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RunPlusPlus.Model
+﻿namespace RunPlusPlus.Model
 {
     class Shortcut
     {
 
         public Shortcut()
         {
-            this.WindowType = WindowTypes.Normal;
+            WindowType = WindowTypes.Normal;
         }
         public string Description { get; set; }
         public string Name { get; set; }

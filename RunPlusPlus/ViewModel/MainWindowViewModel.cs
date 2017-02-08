@@ -2,10 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using RunPlusPlus.Services;
-using System;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
 
 namespace RunPlusPlus.ViewModel
 {
@@ -17,17 +14,17 @@ namespace RunPlusPlus.ViewModel
 
         public MainWindowViewModel()
         {
-            this.InitializeCommands();
+            InitializeCommands();
             LoadShortcuts();
-            ShortcutServices.Changed += (o, e) => this.LoadShortcuts();
+            ShortcutServices.Changed += (o, e) => LoadShortcuts();
         }
 
         private void LoadShortcuts()
         {
-            this.Shortcuts.Clear();
+            Shortcuts.Clear();
             foreach (var item in ShortcutServices.LoadExistingShortcuts())
             {
-                this.Shortcuts.Add(new ShortcutViewModel(item));
+                Shortcuts.Add(new ShortcutViewModel(item));
             }
         }
 
@@ -41,7 +38,7 @@ namespace RunPlusPlus.ViewModel
             set
             {
                 _selectedItem = value;
-                this.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -51,7 +48,7 @@ namespace RunPlusPlus.ViewModel
             set
             {
                 _shorts = value;
-                this.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -60,36 +57,32 @@ namespace RunPlusPlus.ViewModel
         private void AddItem()
         {
             var item = new ShortcutViewModel();
-            this.Shortcuts.Add(item);
-            this.SelectedItem = item;
+            Shortcuts.Add(item);
+            SelectedItem = item;
         }
 
         private void InitializeCommands()
         {
-            this.AddCommand = new RelayCommand(this.AddItem);
-            this.RemoveCommand = new RelayCommand(this.RemoveItem,
+            AddCommand = new RelayCommand(AddItem);
+            RemoveCommand = new RelayCommand(RemoveItem, () => SelectedItem != null);
+            ShowAboutCommand = new RelayCommand(
                 () =>
                 {
-                    return this.SelectedItem != null;
-                });
-            this.ShowAboutCommand = new RelayCommand(
-                () =>
-                {
-                    Messenger.Default.Send<NotificationMessage>(new NotificationMessage(this, ""), "SHOW_ABOUT");
+                    Messenger.Default.Send(new NotificationMessage(this, ""), MessageTokens.ShowAbout);
                 });
         }
         private void RemoveItem()
         {
-            var index = this.Shortcuts.IndexOf(this.SelectedItem);
-            this.SelectedItem.Delete();
-            this.Shortcuts.Remove(this.SelectedItem);
-            if ((index + 1) > this.Shortcuts.Count)
+            var index = Shortcuts.IndexOf(SelectedItem);
+            SelectedItem.Delete();
+            Shortcuts.Remove(SelectedItem);
+            if ((index + 1) > Shortcuts.Count)
             {
                 index--;
             }
-            if (this.Shortcuts.Count != 0)
+            if (Shortcuts.Count != 0)
             {
-                this.SelectedItem = this.Shortcuts[index];
+                SelectedItem = Shortcuts[index];
             }
         }
     }

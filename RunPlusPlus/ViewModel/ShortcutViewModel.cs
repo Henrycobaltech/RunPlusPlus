@@ -26,19 +26,19 @@ namespace RunPlusPlus.ViewModel
                 throw new ArgumentException("Name of the shortcut can not be null");
             }
             this.sysShortcut = sysShortcut;
-            this.oldName = sysShortcut.Name;
-            this.IsExisting = true;
+            oldName = sysShortcut.Name;
+            IsExisting = true;
         }
 
         #region UIProperties
         public string Name
         {
-            get { return this.sysShortcut.Description; }
+            get { return sysShortcut.Description; }
             set
             {
-                this.sysShortcut.Description = value;
-                this.ChangesPending = true;
-                this.RaisePropertyChanged();
+                sysShortcut.Description = value;
+                ChangesPending = true;
+                RaisePropertyChanged();
             }
         }
 
@@ -46,58 +46,58 @@ namespace RunPlusPlus.ViewModel
 
         public string Shortcut
         {
-            get { return this.sysShortcut.Name; }
+            get { return sysShortcut.Name; }
             set
             {
-                this.sysShortcut.Name = value;
-                this.ChangesPending = true;
-                this.RaisePropertyChanged();
+                sysShortcut.Name = value;
+                ChangesPending = true;
+                RaisePropertyChanged();
             }
         }
 
         public string StartupPath
         {
-            get { return this.sysShortcut.StartupPath; }
+            get { return sysShortcut.StartupPath; }
             set
             {
-                this.sysShortcut.StartupPath = value;
-                this.ChangesPending = true;
-                this.RaisePropertyChanged();
+                sysShortcut.StartupPath = value;
+                ChangesPending = true;
+                RaisePropertyChanged();
             }
         }
 
         public string Target
         {
-            get { return this.sysShortcut.Target; }
+            get { return sysShortcut.Target; }
             set
             {
-                this.sysShortcut.Target = value;
-                this.ChangesPending = true;
-                this.RaisePropertyChanged();
+                sysShortcut.Target = value;
+                ChangesPending = true;
+                RaisePropertyChanged();
             }
         }
 
 
         public string Arguments
         {
-            get { return this.sysShortcut.Arguments; }
+            get { return sysShortcut.Arguments; }
             set
             {
-                this.sysShortcut.Arguments = value;
-                this.ChangesPending = true;
-                this.RaisePropertyChanged();
+                sysShortcut.Arguments = value;
+                ChangesPending = true;
+                RaisePropertyChanged();
             }
         }
 
 
         public WindowTypes WindowType
         {
-            get { return this.sysShortcut.WindowType; }
+            get { return sysShortcut.WindowType; }
             set
             {
-                this.sysShortcut.WindowType = value;
-                this.ChangesPending = true;
-                this.RaisePropertyChanged();
+                sysShortcut.WindowType = value;
+                ChangesPending = true;
+                RaisePropertyChanged();
             }
         }
 
@@ -111,7 +111,7 @@ namespace RunPlusPlus.ViewModel
             private set
             {
                 _changesPending = value;
-                this.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -119,12 +119,12 @@ namespace RunPlusPlus.ViewModel
 
         private bool Check()
         {
-            return this.sysShortcut.Check() && this.ChangesPending;
+            return sysShortcut.Check() && ChangesPending;
         }
 
         private void InitializeCommand()
         {
-            this.SaveCommand = new RelayCommand(this.Save, this.Check);
+            SaveCommand = new RelayCommand(Save, Check);
         }
 
         // will be avaliable in later version
@@ -147,15 +147,15 @@ namespace RunPlusPlus.ViewModel
         public RelayCommand SaveCommand { get; set; }
         private void Save()
         {
-            if (this.Check())
+            if (Check())
             {
 
                 try
                 {
-                    this.sysShortcut.Save(this.oldName);
-                    this.IsExisting = true;
-                    this.oldName = this.sysShortcut.Name;
-                    this.ChangesPending = false;
+                    sysShortcut.Save(oldName);
+                    IsExisting = true;
+                    oldName = sysShortcut.Name;
+                    ChangesPending = false;
                 }
                 catch (InvalidOperationException ex)
                 {
@@ -166,9 +166,9 @@ namespace RunPlusPlus.ViewModel
         }
         public void Delete()
         {
-            if (this.IsExisting)
+            if (IsExisting)
             {
-                this.sysShortcut.Delete();
+                sysShortcut.Delete();
             }
         }
     }
