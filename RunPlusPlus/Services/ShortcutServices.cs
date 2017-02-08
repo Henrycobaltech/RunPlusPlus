@@ -18,24 +18,17 @@ namespace RunPlusPlus.Services
 
         internal static void InitializeEnvironmentVariable()
         {
-            try
+            var sysPath = Environment.GetEnvironmentVariable("path", EnvironmentVariableTarget.User);
+            var sb = new StringBuilder(sysPath);
+            if (sysPath == null || !sysPath.Contains(dataFolderPath))
             {
-                var sysPath = Environment.GetEnvironmentVariable("path", EnvironmentVariableTarget.User);
-                var sb = new StringBuilder(sysPath);
-                if (sysPath == null || !sysPath.Contains(dataFolderPath))
+                if (sysPath != null && sysPath.Last() != ';')
                 {
-                    if (sysPath != null && sysPath.Last() != ';')
-                    {
-                        sb.Append(";");
-                    }
-                    sb.Append(dataFolderPath).Append(";");
+                    sb.Append(";");
                 }
-                Environment.SetEnvironmentVariable("path", sb.ToString(), EnvironmentVariableTarget.User);
+                sb.Append(dataFolderPath).Append(";");
             }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show(ex.ToString());
-            }
+            Environment.SetEnvironmentVariable("path", sb.ToString(), EnvironmentVariableTarget.User);
         }
 
         internal static IEnumerable<Shortcut> LoadExistingShortcuts()
