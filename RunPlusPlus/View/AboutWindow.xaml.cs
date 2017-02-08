@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -20,7 +21,7 @@ namespace RunPlusPlus.View
     /// <summary>
     /// Interaction logic for AboutWindow.xaml
     /// </summary>
-    public partial class AboutWindow : Window
+    public partial class AboutWindow : MetroWindow
     {
         public AboutWindow()
         {
@@ -33,7 +34,7 @@ namespace RunPlusPlus.View
 
         private void HyperLinkClick(object sender, RoutedEventArgs e)
         {
-            Process.Start("http://rpp.codeplex.com/");
+            Process.Start((sender as Hyperlink).NavigateUri.ToString());
         }
     }
 }
