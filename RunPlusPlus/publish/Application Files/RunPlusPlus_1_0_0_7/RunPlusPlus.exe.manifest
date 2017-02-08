@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="RunPlusPlus.exe" version="1.0.0.7" publicKeyToken="01865034e226e8aa" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="RunPlusPlus" version="1.5.6248.22261" publicKeyToken="2E29594394ABFBD4" language="neutral" processorArchitecture="msil" />
+    <commandLine file="RunPlusPlus.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet class="System.Security.PermissionSet" version="1" ID="Custom" SameSite="site" Unrestricted="true" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- UAC Manifest Options
+             If you want to change the Windows User Account Control level replace the 
+             requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+            Specifying requestedExecutionLevel element will disable file and registry virtualization. 
+            Remove this element if your application requires this virtualization for backwards
+            compatibility.
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GalaSoft.MvvmLight.dll" size="29696">
+      <assemblyIdentity name="GalaSoft.MvvmLight" version="5.0.2.32240" publicKeyToken="E7570AB207BCB616" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>6ya6t5YFoip0ue3OjV7gHtMD/S8TPXTzmb2tt/v+MSI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GalaSoft.MvvmLight.Extras.dll" size="17920">
+      <assemblyIdentity name="GalaSoft.MvvmLight.Extras" version="5.0.2.32242" publicKeyToken="669F0B5E8F868ABF" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>xXWznKgBHZ5yB2d5BGIVLG9rl2KbDYTFPC6afLekwTE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GalaSoft.MvvmLight.Platform.dll" size="13824">
+      <assemblyIdentity name="GalaSoft.MvvmLight.Platform" version="5.0.2.32241" publicKeyToken="5F873C45E98AF8A1" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>daF6SAWsplIC2i2wqkCBY3c3Q8j3wXh+kxICC5QmDIY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MahApps.Metro.dll" size="940544">
+      <assemblyIdentity name="MahApps.Metro" version="1.2.4.0" publicKeyToken="F4FB5A3C4D1E5B4F" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>DectpLwtFtOcMDaK+IDXVPoL2XRYl2UrpQIT5YnSZcU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MaterialDesignColors.dll" size="224256">
+      <assemblyIdentity name="MaterialDesignColors" version="1.1.2.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>d4wZkVSpfjUBqYKDtRfNT80gSBwKfOiY66XUQlfkFX0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MaterialDesignThemes.MahApps.dll" size="25088">
+      <assemblyIdentity name="MaterialDesignThemes.MahApps" version="0.0.10.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>8TL0mFCC/HG/WdzzSvA3NGen+3r/MkUsDJakkmrRCDQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MaterialDesignThemes.Wpf.dll" size="4475904">
+      <assemblyIdentity name="MaterialDesignThemes.Wpf" version="2.2.1.750" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>06EvYVkFhtkz7rc5zo9GMsYayIeA8wyAXAJ8TglbqYo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RunPlusPlus.exe" size="322496">
+      <assemblyIdentity name="RunPlusPlus" version="1.5.6248.22261" publicKeyToken="2E29594394ABFBD4" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>blqcFuJHLTBYrD3gpNhBDCwC/CrRx/f6WNrk2MhfNxM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.Windows.Interactivity.dll" size="55904">
+      <assemblyIdentity name="System.Windows.Interactivity" version="4.5.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>k/vFnkiAr8nxNsOsCXatp/P6p8rO3OXIJLM3y8qdLr8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="icon.ico" size="142394">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>vxF2YgL3Pla3KY57028QOSA504o+L/ackibH3QUN07M=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="RunPlusPlus.exe.config" size="184">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>gKxXKIvI1oB2Ujf3NLkY67/jWCAETGNca3j2WtIebak=</dsig:DigestValue>
+    </hash>
+  </file>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- A list of the Windows versions that this application has been tested on and is
+           is designed to work with. Uncomment the appropriate elements and Windows will 
+           automatically selected the most compatible environment. -->
+      <!-- Windows Vista -->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
+      <!-- Windows 7 -->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />-->
+      <!-- Windows 8 -->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />-->
+      <!-- Windows 8.1 -->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />-->
+      <!-- Windows 10 -->
+      <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
+    </application>
+  </compatibility>
+<publisherIdentity name="CN=HC-TP-P50\Henry" issuerKeyHash="bb4d774ff1724012da17695ad05c714d99a5d88e" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>dhJfAw/FWjkSCcSc0VSOOR3X0tBKbO71qV6cETE/TkE=</DigestValue></Reference></SignedInfo><SignatureValue>u8eky6lQZ8Prf7jcsyxScwaWOEQTlFCAxhPe10eCXlKpUIHRFfmTe4w4BbY6dOko/2Iu9oGqrgvkPdTRGBWvO9dTttG98//Da53C9jFKrAb0Q+T2zX172oyzS91VaMd9BFZNvBcMkHnitSlPzfSMg9qHLAaA/817PjCZ01KaVWU=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>4BywGgqmxKmzq16E2mu4W+habYMpwqCPvFdygKr3crbt46ZVXtaOHgpTCfkM+u5vqzxge/GqSviVFRoOjvibkBnv3TFj8PQ0A83gkLPOR59H9mnky81YdIWiMO3GBbLbTEuKAoewHza53zFUNQJFVgb5eKF2AzPtKlNv5GvDCtc=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="414e3f31119c5ea9f5ee6c4ad0d2d71d398e54d19cc40912395ac50f035f1276" Description="" Url=""><as:assemblyIdentity name="RunPlusPlus.exe" version="1.0.0.7" publicKeyToken="01865034e226e8aa" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=HC-TP-P50\Henry</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>FpJ9lguxlNwa1deF8BULuyrWxCddbYX+spIeKVj0B3o=</DigestValue></Reference></SignedInfo><SignatureValue>gARoLc/41RwcB7HHZUFV2OG9qnWRzpTwLIn+oPmsGaDEX/MI0ylpuJ/2G1HmQWNycmkVxkGqT34O/DwfBNgw1BO2HfIyY246BOpLqNtlBxJIFxIwzZn7fJ/ezUdacLLq1R2znBp8YpOBke634WWbCsIlQApznINJ5YKYwCGXgC0=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>4BywGgqmxKmzq16E2mu4W+habYMpwqCPvFdygKr3crbt46ZVXtaOHgpTCfkM+u5vqzxge/GqSviVFRoOjvibkBnv3TFj8PQ0A83gkLPOR59H9mnky81YdIWiMO3GBbLbTEuKAoewHza53zFUNQJFVgb5eKF2AzPtKlNv5GvDCtc=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB1TCCAT6gAwIBAgIQHT/f4zqYrphFUu1WKLbtJTANBgkqhkiG9w0BAQsFADApMScwJQYDVQQDHh4ASABDAC0AVABQAC0AUAA1ADAAXABIAGUAbgByAHkwHhcNMTYxMTAxMTEyNTI0WhcNMTcxMTAxMTcyNTI0WjApMScwJQYDVQQDHh4ASABDAC0AVABQAC0AUAA1ADAAXABIAGUAbgByAHkwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAOAcsBoKpsSps6tehNpruFvoWm2DKcKgj7xXcoCq93K27eOmVV7Wjh4KUwn5DPrub6s8YHvxqkr4lRUaDo74m5AZ790xY/D0NAPN4JCzzkefR/Zp5MvNWHSFojDtxgWy20xLigKHsB82ud8xVDUCRVYG+XihdgMz7SpTb+RrwwrXAgMBAAEwDQYJKoZIhvcNAQELBQADgYEA3RYDZeBWHp3AEsovADx8SHz/NDYnBKij/l7peAb6cnun3mZkk1jmY/e8mKbZb+UW2Z92T4COLS4ki89ZfxDqqknprPd2AmzEenBqDMvZ7RwAL7QUUh1h7snIcTYYrtFaDnOaUMC/8g0M5YCzFBcEzEKh0FbenoTfwbuFMfSdqQA=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
