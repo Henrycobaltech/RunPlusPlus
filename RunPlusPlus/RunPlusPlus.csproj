@@ -34,7 +34,7 @@
     <InstallUrl>https://raw.githubusercontent.com/Henrycobaltech/RunPlusPlus/master/RunPlusPlus/publish/</InstallUrl>
     <UpdateUrl>https://raw.githubusercontent.com/Henrycobaltech/RunPlusPlus/master/RunPlusPlus/publish/</UpdateUrl>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

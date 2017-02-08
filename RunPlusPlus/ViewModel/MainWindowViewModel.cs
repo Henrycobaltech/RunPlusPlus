@@ -10,7 +10,7 @@ namespace RunPlusPlus.ViewModel
     {
         private ShortcutViewModel _selectedItem;
 
-        private ObservableCollection<ShortcutViewModel> _shorts = new ObservableCollection<ShortcutViewModel>();
+        private ObservableCollection<ShortcutViewModel> _shortCuts = new ObservableCollection<ShortcutViewModel>();
 
         public MainWindowViewModel()
         {
@@ -39,15 +39,16 @@ namespace RunPlusPlus.ViewModel
             {
                 _selectedItem = value;
                 RaisePropertyChanged();
+                RemoveCommand.RaiseCanExecuteChanged();
             }
         }
 
         public ObservableCollection<ShortcutViewModel> Shortcuts
         {
-            get { return _shorts; }
+            get { return _shortCuts; }
             set
             {
-                _shorts = value;
+                _shortCuts = value;
                 RaisePropertyChanged();
             }
         }
